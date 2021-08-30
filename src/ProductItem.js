@@ -41,9 +41,10 @@ const ProductItem = ({ style, product, loadCart }) => {
       rowData.modifiers = chosenModifiers;
     }
 
-    const locPath = window.location.pathname.match(/\/.*\/deal\/.*\/(\d+)\//);
-    if (locPath && locPath[1] > 0) {
-      rowData.dealId = locPath[1];
+    const urlParams = new URLSearchParams(window.location.search);
+    const dealId = urlParams.get("dealId");
+    if (dealId) {
+      rowData.dealId = dealId;
     }
     const { data } = await axios.post(
       "https://crm.hq.fungeek.net/rest/1/63dif6icpi61ci3f/add.deal.basket.item",
