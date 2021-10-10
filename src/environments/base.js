@@ -1,4 +1,4 @@
-export default function (baseApi) {
+export default function environment(baseApi) {
   return {
     api: baseApi,
   };
