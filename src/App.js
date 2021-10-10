@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-require("dotenv").config();
 import axios from "axios";
 import { Input, Tree, Layout, Row, Col, Button } from "antd";
 import { FixedSizeList as List } from "react-window";
@@ -9,6 +8,7 @@ import currency from "currency.js";
 import { MinusOutlined, PlusOutlined, CloseOutlined } from "@ant-design/icons";
 import "./App.css";
 const ru = require("convert-layout/ru");
+require("dotenv").config();
 
 const { Search } = Input;
 const { hostname } = window.location;

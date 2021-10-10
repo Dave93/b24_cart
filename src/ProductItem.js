@@ -1,10 +1,10 @@
 import React, { useState, useMemo, memo } from "react";
-require("dotenv").config();
 import { Disclosure, Transition, Switch } from "@headlessui/react";
 import currency from "currency.js";
 
 import { ChevronUpIcon } from "@heroicons/react/solid";
 import axios from "axios";
+require("dotenv").config();
 
 const ProductItem = ({ style, product, loadCart }) => {
   const defaultModifiers = [];
