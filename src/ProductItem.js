@@ -8,6 +8,8 @@ import axios from "axios";
 const ProductItem = ({ style, product, loadCart }) => {
   const defaultModifiers = [];
 
+  console.log(product);
+
   if (product.modifiers) {
     const freeModifier = product.modifiers.find((mod) => mod.PRICE == 0);
     defaultModifiers.push(freeModifier.PRODUCT_ID);
