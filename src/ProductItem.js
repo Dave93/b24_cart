@@ -48,7 +48,7 @@ const ProductItem = ({ style, product, loadCart }) => {
       rowData.dealId = dealId;
     }
     const { data } = await axios.post(
-      `https://${process.env.CRM_URL}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
+      `https://${process.env.REACT_APP_CRM_URL}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
       rowData
     );
 
