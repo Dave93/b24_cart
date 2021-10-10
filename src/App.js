@@ -6,6 +6,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import ProductItem from "./ProductItem";
 import currency from "currency.js";
 import { MinusOutlined, PlusOutlined, CloseOutlined } from "@ant-design/icons";
+import environment from "environment";
 import "./App.css";
 const ru = require("convert-layout/ru");
 require("dotenv").config();
@@ -20,8 +21,6 @@ if (hostname == "localhost") {
 }
 
 function App() {
-  console.log(dev);
-
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [searchVal, setSearchVal] = useState("");
@@ -32,14 +31,14 @@ function App() {
   const loadItems = async () => {
     // if (dev) {
     const { data } = await axios.get(
-      `https://${process.env.REACT_APP_CRM_URL}/rest/1/63dif6icpi61ci3f/get.product.categories`
+      `https://${environment.api}/rest/1/63dif6icpi61ci3f/get.product.categories`
     );
     if (data.result) {
       setCategories(data.result);
     }
 
     const { data: productsData } = await axios.get(
-      `https://${process.env.REACT_APP_CRM_URL}/rest/1/63dif6icpi61ci3f/get.product.list`
+      `https://${environment.api}/rest/1/63dif6icpi61ci3f/get.product.list`
     );
     if (productsData.result) {
       setProducts(productsData.result);
@@ -63,14 +62,14 @@ function App() {
 
     if (dealId) {
       const { data } = await axios.get(
-        `https://${process.env.REACT_APP_CRM_URL}/rest/1/63dif6icpi61ci3f/load.cart?dealId=` +
+        `https://${environment.api}/rest/1/63dif6icpi61ci3f/load.cart?dealId=` +
           dealId
       );
       setCartItems(data.result.items);
       setCartTotalPrice(data.result.totalPrice);
     } else {
       const { data } = await axios.get(
-        `https://${process.env.REACT_APP_CRM_URL}/rest/1/63dif6icpi61ci3f/load.cart`
+        `https://${environment.api}/rest/1/63dif6icpi61ci3f/load.cart`
       );
       setCartItems(data.result.items);
       setCartTotalPrice(data.result.totalPrice);
@@ -79,21 +78,21 @@ function App() {
 
   const increaseBasketItem = async (id) => {
     const { data } = await axios.get(
-      `https://${process.env.REACT_APP_CRM_URL}/rest/1/63dif6icpi61ci3f/increase.basket.item?rowId=${id}&quantity=1`
+      `https://${environment.api}/rest/1/63dif6icpi61ci3f/increase.basket.item?rowId=${id}&quantity=1`
     );
     loadCart();
   };
 
   const decreaseBasketItem = async (id) => {
     const { data } = await axios.get(
-      `https://${process.env.REACT_APP_CRM_URL}/rest/1/63dif6icpi61ci3f/decrease.basket.item?rowId=${id}&quantity=1`
+      `https://${environment.api}/rest/1/63dif6icpi61ci3f/decrease.basket.item?rowId=${id}&quantity=1`
     );
     loadCart();
   };
 
   const deleteBasketItem = async (id) => {
     const { data } = await axios.get(
-      `https://${process.env.REACT_APP_CRM_URL}/rest/1/63dif6icpi61ci3f/delete.basket.item?rowId=${id}`
+      `https://${environment.api}/rest/1/63dif6icpi61ci3f/delete.basket.item?rowId=${id}`
     );
     loadCart();
   };

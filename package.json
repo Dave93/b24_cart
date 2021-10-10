@@ -26,8 +26,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "cross-env TAILWIND_MODE=watch craco start",
-    "build": "craco build",
+    "start": "cross-env TAILWIND_MODE=watch CLIENT_ENV=development craco start",
+    "prod": "cross-env CLIENT_ENV=production craco start",
+    "build": "cross-env CLIENT_ENV=production craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "watch:css": "postcss -w src/index.css -o src/output.css"

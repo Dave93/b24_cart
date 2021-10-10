@@ -4,6 +4,7 @@ import currency from "currency.js";
 
 import { ChevronUpIcon } from "@heroicons/react/solid";
 import axios from "axios";
+import environment from "environment";
 require("dotenv").config();
 
 const ProductItem = ({ style, product, loadCart }) => {
@@ -48,7 +49,7 @@ const ProductItem = ({ style, product, loadCart }) => {
       rowData.dealId = dealId;
     }
     const { data } = await axios.post(
-      `https://${process.env.REACT_APP_CRM_URL}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
+      `https://${environment.api}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
       rowData
     );
 
