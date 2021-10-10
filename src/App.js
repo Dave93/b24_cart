@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+require("dotenv").config();
 import axios from "axios";
 import { Input, Tree, Layout, Row, Col, Button } from "antd";
 import { FixedSizeList as List } from "react-window";
@@ -31,14 +32,14 @@ function App() {
   const loadItems = async () => {
     // if (dev) {
     const { data } = await axios.get(
-      "https://crm.hq.fungeek.net/rest/1/63dif6icpi61ci3f/get.product.categories"
+      `https://${process.env.CRM_URL}/rest/1/63dif6icpi61ci3f/get.product.categories`
     );
     if (data.result) {
       setCategories(data.result);
     }
 
     const { data: productsData } = await axios.get(
-      "https://crm.hq.fungeek.net/rest/1/63dif6icpi61ci3f/get.product.list"
+      `https://${process.env.CRM_URL}/rest/1/63dif6icpi61ci3f/get.product.list`
     );
     if (productsData.result) {
       setProducts(productsData.result);
@@ -62,14 +63,14 @@ function App() {
 
     if (dealId) {
       const { data } = await axios.get(
-        "https://crm.hq.fungeek.net/rest/1/63dif6icpi61ci3f/load.cart?dealId=" +
+        `https://${process.env.CRM_URL}/rest/1/63dif6icpi61ci3f/load.cart?dealId=` +
           dealId
       );
       setCartItems(data.result.items);
       setCartTotalPrice(data.result.totalPrice);
     } else {
       const { data } = await axios.get(
-        "https://crm.hq.fungeek.net/rest/1/63dif6icpi61ci3f/load.cart"
+        `https://${process.env.CRM_URL}/rest/1/63dif6icpi61ci3f/load.cart`
       );
       setCartItems(data.result.items);
       setCartTotalPrice(data.result.totalPrice);
@@ -78,21 +79,21 @@ function App() {
 
   const increaseBasketItem = async (id) => {
     const { data } = await axios.get(
-      `https://crm.hq.fungeek.net/rest/1/63dif6icpi61ci3f/increase.basket.item?rowId=${id}&quantity=1`
+      `https://${process.env.CRM_URL}/rest/1/63dif6icpi61ci3f/increase.basket.item?rowId=${id}&quantity=1`
     );
     loadCart();
   };
 
   const decreaseBasketItem = async (id) => {
     const { data } = await axios.get(
-      `https://crm.hq.fungeek.net/rest/1/63dif6icpi61ci3f/decrease.basket.item?rowId=${id}&quantity=1`
+      `https://${process.env.CRM_URL}/rest/1/63dif6icpi61ci3f/decrease.basket.item?rowId=${id}&quantity=1`
     );
     loadCart();
   };
 
   const deleteBasketItem = async (id) => {
     const { data } = await axios.get(
-      `https://crm.hq.fungeek.net/rest/1/63dif6icpi61ci3f/delete.basket.item?rowId=${id}`
+      `https://${process.env.CRM_URL}/rest/1/63dif6icpi61ci3f/delete.basket.item?rowId=${id}`
     );
     loadCart();
   };

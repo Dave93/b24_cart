@@ -1,4 +1,5 @@
 import React, { useState, useMemo, memo } from "react";
+require("dotenv").config();
 import { Disclosure, Transition, Switch } from "@headlessui/react";
 import currency from "currency.js";
 
@@ -7,8 +8,6 @@ import axios from "axios";
 
 const ProductItem = ({ style, product, loadCart }) => {
   const defaultModifiers = [];
-
-  console.log(product);
 
   if (product.modifiers) {
     const freeModifier = product.modifiers.find((mod) => mod.PRICE == 0);
@@ -49,7 +48,7 @@ const ProductItem = ({ style, product, loadCart }) => {
       rowData.dealId = dealId;
     }
     const { data } = await axios.post(
-      "https://crm.hq.fungeek.net/rest/1/63dif6icpi61ci3f/add.deal.basket.item",
+      `https://${process.env.CRM_URL}/rest/1/63dif6icpi61ci3f/add.deal.basket.item`,
       rowData
     );
 
